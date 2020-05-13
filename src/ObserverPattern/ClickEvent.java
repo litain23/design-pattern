@@ -1,7 +1,5 @@
 package ObserverPattern;
 
-import java.util.Random;
-
 public class ClickEvent extends Event {
     private int clickCnt;
 

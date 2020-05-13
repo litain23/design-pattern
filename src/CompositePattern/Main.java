@@ -1,7 +1,5 @@
 package CompositePattern;
 
-import BuilderPattern.Director;
-
 public class Main {
     public static void main(String[] args) {
         try {

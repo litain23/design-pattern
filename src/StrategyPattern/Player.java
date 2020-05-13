@@ -1,7 +1,5 @@
 package StrategyPattern;
 
-import javax.swing.*;
-
 public class Player {
     private String name;
     private Strategy strategy;
