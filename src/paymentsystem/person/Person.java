@@ -1,6 +1,6 @@
 package paymentsystem.person;
 
-import paymentsystem.Account;
+import paymentsystem.bank.account.Account;
 import paymentsystem.Card;
 
 import java.util.List;
