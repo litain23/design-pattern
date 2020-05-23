@@ -3,9 +3,9 @@ package paymentsystem.bank;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import paymentsystem.bank.account.Account;
+import paymentsystem.bank.account.NormalAccount;
 import paymentsystem.bank.account.Bank;
-import paymentsystem.bank.framework.Factory;
+import paymentsystem.bank.framework.AccountFactory;
 import paymentsystem.person.Person;
 import paymentsystem.person.PersonGenerator;
 
@@ -16,7 +16,7 @@ public class BankTest {
         Person person = PersonGenerator.generatePerson("아무개");
 
         Bank bank = new Bank("카카오", 570000000);
-        Account account = (Account) bank.create(person);
+        NormalAccount account = (NormalAccount) bank.create(person, AccountFactory.Type.NORMAL);
 
         assertEquals(account, bank.getAccountList().get(0));
     }
@@ -26,7 +26,7 @@ public class BankTest {
         Person person = PersonGenerator.generatePerson("아무개");
 
         Bank bank = new Bank("카카오", 570000000);
-        Account account = (Account) bank.create(person);
+        NormalAccount account = (NormalAccount) bank.create(person, AccountFactory.Type.NORMAL);
 
         account.deposit(1000);
         assertEquals(1000, account.getBalance());
@@ -40,7 +40,7 @@ public class BankTest {
         Person person = PersonGenerator.generatePerson("아무개");
 
         Bank bank = new Bank("카카오", 570000000);
-        Account account = (Account) bank.create(person);
+        NormalAccount account = (NormalAccount) bank.create(person, AccountFactory.Type.NORMAL);
 
         account.deposit(1000);
         assertEquals(1000, account.getBalance());
