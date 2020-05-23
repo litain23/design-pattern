@@ -1,7 +1,7 @@
 package paymentsystem.person;
 
-import paymentsystem.bank.account.Account;
-import paymentsystem.Card;
+import paymentsystem.bank.framework.Account;
+import paymentsystem.card.framework.Card;
 
 import java.util.List;
 
