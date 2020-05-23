@@ -1,12 +1,12 @@
 package paymentsystem.bank.account;
-import paymentsystem.bank.framework.Factory;
-import paymentsystem.bank.framework.Product;
+import paymentsystem.bank.framework.AccountFactory;
+import paymentsystem.bank.framework.Account;
 import paymentsystem.person.Person;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bank extends Factory {
+public class Bank extends AccountFactory {
     private List<Account> accountList = new ArrayList<>();
     private List<String> transactionList = new ArrayList<>();
     private String name;
@@ -19,14 +19,21 @@ public class Bank extends Factory {
     }
 
     @Override
-    protected Product createProduct(Person owner) {
+    protected Account createProduct(Person owner, Type type) {
         accountNumber++;
-        return new Account(owner, id + accountNumber, name);
+        switch (type) {
+            case NORMAL:
+                return new NormalAccount(owner, id + accountNumber, name);
+            case MINUS:
+                return new MinusAccount(owner, id + accountNumber, name);
+            default:
+                return new NormalAccount(owner, id + accountNumber, name);
+        }
     }
 
     @Override
-    protected void registerProduct(Product p) {
-        accountList.add((Account)p);
+    protected void registerProduct(Account p) {
+        accountList.add((NormalAccount)p);
     }
 
     public List<Account> getAccountList() {

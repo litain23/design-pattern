@@ -1,16 +1,15 @@
 package paymentsystem.bank.account;
 
-
-import paymentsystem.bank.framework.Product;
+import paymentsystem.bank.framework.Account;
 import paymentsystem.person.Person;
 
-public class Account implements Product {
+public class NormalAccount implements Account {
     private Person owner;
     private long balance;
     private long accountNumber;
     private String bankName;
 
-    public Account(Person owner, long accountNumber, String bankName) {
+    public NormalAccount(Person owner, long accountNumber, String bankName) {
         this.owner = owner;
         this.accountNumber = accountNumber;
         this.bankName = bankName;
@@ -18,7 +17,7 @@ public class Account implements Product {
     }
 
     @Override
-    public void deposit(int money) {
+    public void deposit(long money) {
         balance += money;
     }
 
@@ -31,10 +30,12 @@ public class Account implements Product {
         return money;
     }
 
+    @Override
     public long getBalance() {
         return balance;
     }
 
+    @Override
     public Person getOwner() {
         return owner;
     }
