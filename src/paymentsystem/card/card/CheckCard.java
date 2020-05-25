@@ -1,6 +1,6 @@
 package paymentsystem.card.card;
 
-import paymentsystem.Store;
+import paymentsystem.store.Store;
 import paymentsystem.bank.framework.Account;
 import paymentsystem.card.framework.Card;
 import paymentsystem.person.Person;
@@ -17,8 +17,7 @@ public class CheckCard implements Card {
     @Override
     public void pay(Store store, long money) {
         account.withdraw(money);
-        // transactional ? 필요
-        // store.account.deposit(money);
+        store.saleProduct(money);
     }
 
     @Override

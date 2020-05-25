@@ -3,6 +3,8 @@ package paymentsystem.bank.account;
 import paymentsystem.bank.framework.Account;
 import paymentsystem.person.Person;
 
+import java.util.Objects;
+
 public class NormalAccount implements Account {
     private Person owner;
     private long balance;
@@ -38,5 +40,15 @@ public class NormalAccount implements Account {
     @Override
     public Person getOwner() {
         return owner;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NormalAccount that = (NormalAccount) o;
+        return accountNumber == that.accountNumber &&
+                owner.equals(that.owner) &&
+                bankName.equals(that.bankName);
     }
 }

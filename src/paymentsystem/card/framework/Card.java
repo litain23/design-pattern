@@ -1,6 +1,6 @@
 package paymentsystem.card.framework;
 
-import paymentsystem.Store;
+import paymentsystem.store.Store;
 
 public interface Card {
     public void pay(Store store, long money);

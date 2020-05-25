@@ -9,7 +9,5 @@ import paymentsystem.person.PersonGenerator;
 public class Main {
     public static void main(String[] args) {
         Person person = PersonGenerator.generatePerson("아무개");
-
-
     }
 }
