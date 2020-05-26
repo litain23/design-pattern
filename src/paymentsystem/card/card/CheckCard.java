@@ -1,9 +1,13 @@
 package paymentsystem.card.card;
 
+import paymentsystem.bank.account.NormalAccount;
 import paymentsystem.store.Store;
 import paymentsystem.bank.framework.Account;
 import paymentsystem.card.framework.Card;
 import paymentsystem.person.Person;
+import paymentsystem.transaction.Transaction;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class CheckCard implements Card {
     private Person owner;
@@ -15,9 +19,13 @@ public class CheckCard implements Card {
     }
 
     @Override
-    public void pay(Store store, long money) {
+    public void pay(Store store, long money) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        Transaction tx = new Transaction();
+        tx.begin();
+        tx.register(NormalAccount.class, account.getClass(), "withdraw", new String[]{"123"});
         account.withdraw(money);
         store.saleProduct(money);
+        tx.commit();
     }
 
     @Override

@@ -11,6 +11,10 @@ import paymentsystem.card.card.CardCompany;
 import paymentsystem.card.framework.Card;
 import paymentsystem.person.Person;
 import paymentsystem.person.PersonGenerator;
+import paymentsystem.store.Store;
+import paymentsystem.store.StoreTest;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class CardCompanyTest {
     Person owner;
@@ -18,6 +22,7 @@ public class CardCompanyTest {
     Bank bank;
     CardCompany cardCompany = new CardCompany("신한");
     Card checkCard;
+    Store store;
 
 
     @BeforeEach
@@ -25,6 +30,8 @@ public class CardCompanyTest {
          owner = PersonGenerator.generatePerson("아무개");
          bank = new Bank("신한", 110000000);
          account = (NormalAccount) bank.create(owner, AccountFactory.Type.NORMAL);
+         owner.getAccountList().add(account);
+         store = new Store(owner, account);
     }
 
     @Test
@@ -59,10 +66,23 @@ public class CardCompanyTest {
     }
 
     @Test
-    public void When_PayStoreEnoughMoney_Expect_StoreAccountIncrease() {
-        // Store 의 미구현
-        System.out.println("Store 미구현");
-        assert(false);
+    public void When_PayStoreEnoughMoney_Expect_StoreAccountIncrease() throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        checkCard = cardCompany.create(owner, account);
+
+        long enoughMoney = 1000000;
+        checkCard.deposit(enoughMoney);
+        checkCard.pay(store, 1000);
+    }
+
+    @Test
+    public void When_PayStoreNotEnoguthMoney_Expect_IllegalArugmentException() {
+        checkCard = cardCompany.create(owner, account);
+        long depositMoney = 1000;
+        checkCard.deposit(depositMoney);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            checkCard.pay(store, 2000);
+        });
     }
 
 }

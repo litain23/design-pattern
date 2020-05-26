@@ -11,6 +11,8 @@ public class NormalAccount implements Account {
     private long accountNumber;
     private String bankName;
 
+    public NormalAccount() {}
+
     public NormalAccount(Person owner, long accountNumber, String bankName) {
         this.owner = owner;
         this.accountNumber = accountNumber;

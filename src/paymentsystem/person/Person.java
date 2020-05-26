@@ -4,6 +4,7 @@ import paymentsystem.bank.framework.Account;
 import paymentsystem.card.framework.Card;
 import paymentsystem.store.Store;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class Person {
         return cardList;
     }
 
-    public void payWithCard(Store store, Card card, long money) {
+    public void payWithCard(Store store, Card card, long money) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         card.pay(store, money);
     }
 
