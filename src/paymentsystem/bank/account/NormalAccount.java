@@ -5,7 +5,7 @@ import paymentsystem.person.Person;
 
 import java.util.Objects;
 
-public class NormalAccount implements Account {
+public class NormalAccount implements Account, Cloneable {
     private Person owner;
     private long balance;
     private long accountNumber;
@@ -52,5 +52,11 @@ public class NormalAccount implements Account {
         return accountNumber == that.accountNumber &&
                 owner.equals(that.owner) &&
                 bankName.equals(that.bankName);
+    }
+
+    @Override
+    public NormalAccount clone() throws CloneNotSupportedException {
+        NormalAccount normalAccount = (NormalAccount) super.clone();
+        return normalAccount;
     }
 }

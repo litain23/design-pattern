@@ -66,16 +66,18 @@ public class CardCompanyTest {
     }
 
     @Test
-    public void When_PayStoreEnoughMoney_Expect_StoreAccountIncrease() throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+    public void When_PayStoreEnoughMoney_Expect_StoreAccountIncrease() throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, CloneNotSupportedException {
         checkCard = cardCompany.create(owner, account);
 
         long enoughMoney = 1000000;
         checkCard.deposit(enoughMoney);
         checkCard.pay(store, 1000);
+
+        System.out.println(checkCard.getAccount().getBalance());
     }
 
     @Test
-    public void When_PayStoreNotEnoguthMoney_Expect_IllegalArugmentException() {
+    public void When_PayStoreNotEnoguthMoney_Expect_IllegalArgumentException() {
         checkCard = cardCompany.create(owner, account);
         long depositMoney = 1000;
         checkCard.deposit(depositMoney);

@@ -46,7 +46,7 @@ public class Person {
         return cardList;
     }
 
-    public void payWithCard(Store store, Card card, long money) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+    public void payWithCard(Store store, Card card, long money) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, CloneNotSupportedException {
         card.pay(store, money);
     }
 

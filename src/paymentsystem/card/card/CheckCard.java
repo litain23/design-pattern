@@ -19,10 +19,10 @@ public class CheckCard implements Card {
     }
 
     @Override
-    public void pay(Store store, long money) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void pay(Store store, long money) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, CloneNotSupportedException {
         Transaction tx = new Transaction();
         tx.begin();
-        tx.register(NormalAccount.class, account.getClass(), "withdraw", new String[]{"123"});
+//        tx.register(account, "withdraw", new Object[]{"123"});
         account.withdraw(money);
         store.saleProduct(money);
         tx.commit();
@@ -36,6 +36,11 @@ public class CheckCard implements Card {
     @Override
     public void withdraw(long money) {
         account.withdraw(money);
+    }
+
+    @Override
+    public Account getAccount() {
+        return account;
     }
 
 

@@ -5,6 +5,7 @@ import paymentsystem.bank.account.NormalAccount;
 import paymentsystem.bank.framework.Account;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Set;
 
 public class Transaction {
@@ -29,8 +30,26 @@ public class Transaction {
 
     }
 
-    public void register(Class className, Object object, String methodName, String[] args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        System.out.println(object.getClass());
+    public void register(Account account, String methodName, Object[] args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, CloneNotSupportedException {
+        NormalAccount tempAccount = ((NormalAccount)account).clone();
+//        NormalAccount tempAccount = className.cast()
+//
+//        System.out.println(account.getClass().getConstructor().getName());
+//        System.out.println(account.getClass().getCanonicalName());
+//        account.getClass().cast(Account.class);
+//        System.out.println(account.getClass().cast(account.getClass().getConstructor()).getClass().getName());
+
+
+        Method[] methods = tempAccount.getClass().getDeclaredMethods();
+        System.out.println(tempAccount.getBalance());
+
+        for(Method method : methods) {
+            if(method.getName().equals(methodName)) {
+                method.invoke(tempAccount, 100000);
+            }
+        }
+
+        System.out.println(tempAccount.getBalance());
     }
 }
 
